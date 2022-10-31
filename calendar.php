@@ -34,12 +34,15 @@
             transform: scale(1.05);
             background-color: lightcyan;
         }
+        .holiday{
+            background-color: pink;
+        }
     </style>
 </head>
 <body>
 <?php
 $cal=[];
-
+$holiday=['2022-10-25'=>"光復節","2022-10-10"=>"國慶日"];
 $month=(isset($_GET['m']))?$_GET['m']:date("n");
 $year=(isset($_GET['y']))?$_GET['y']:date("Y");
 
@@ -83,7 +86,22 @@ echo "月曆天數共".($monthDays+$spaceDays)."天，".$weeks."周";
 <div class='cal'>
 <?php
 foreach($cal as $i => $day){
-    echo "<div class='date'>$day</div>";
+    if($day!=""){
+        $show=explode("-",$day)[2];
+    }else{
+        $show="";
+    }
+    
+    if(array_key_exists($day,$holiday)){
+
+        echo "<div class='date holiday'>";
+        echo $show;
+        echo "<div>{$holiday[$day]}</div>";
+        echo "</div>";
+    }else{
+
+        echo "<div class='date'>$show</div>";
+    }
 }
 ?>
 </div>
