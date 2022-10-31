@@ -9,6 +9,7 @@
         *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
         table{
             border-collapse: collapse;
@@ -16,6 +17,22 @@
         table td{
             border:1px solid #ccc;
             padding:3px 9px;
+        }
+        .cal{
+            display:flex;
+            flex-wrap: wrap;
+            width:80%;
+            margin: auto;
+        }
+        .cal .date{
+            border:1px solid #999;
+            width:calc(100% / 7);
+            margin-left:-1px;
+            margin-top:-1px;
+        }
+        .cal .date:hover{
+            transform: scale(1.05);
+            background-color: lightcyan;
         }
     </style>
 </head>
@@ -63,21 +80,13 @@ echo "月曆天數共".($monthDays+$spaceDays)."天，".$weeks."周";
     <a href="?y=2022&m=<?=$nextMonth;?>">下一個月</a>
 </div>
 
-<table>
+<div class='cal'>
 <?php
 foreach($cal as $i => $day){
-    if($i%7==0){
-        echo "<tr>";
-    }
-        echo "<td>$day</td>";
-
-    if($i%7==6){
-        echo "</tr>";
-    }
+    echo "<div class='date'>$day</div>";
 }
-
 ?>
+</div>
 
-</table>
 </body>
 </html>
