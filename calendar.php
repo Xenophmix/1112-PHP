@@ -36,14 +36,23 @@ $monthDays=date("t",strtotime($firstDay));
 $lastDay=$year.'-'.$month.'-'.$monthDays;
 $spaceDays=$firstDayWeek-1;
 $weeks=ceil(($monthDays+$spaceDays)/7);
+$lastSpaceDays=$weeks*7-$monthDays-$spaceDays;
 
+//前面的空白日
 for($i=0;$i<$spaceDays;$i++){
     $cal[]='';
 }
 
+//當月的日期
 for($i=0;$i<$monthDays;$i++){
     $cal[]=date("Y-m-d",strtotime("+$i days",strtotime($firstDay)));
 }
+
+//月尾的空白日
+for($i=0;$i<$lastSpaceDays;$i++){
+    $cal[]='';
+}
+
 
 /* echo "<pre>";
 print_r($cal);
